@@ -1,6 +1,6 @@
 'use server'
 
-import {date, z} from 'zod';
+import {z} from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -68,6 +68,7 @@ export async function updateInvoice(id: string, formData: FormData) {
         SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
         WHERE id = ${id}
       `;
+    return {message: 'Success Updated'}
   } catch (error) {
     return { message: 'Database Error: Failed to Update Invoice.' };
   }
